@@ -1,106 +1,113 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>CodeCrafter AIX</title>
-    
+
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA/4QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAERERERERERERAAAAAAAAERAQAAAAAAEBEAEAAAAAEAEQABAAAAEAARAAAQAAAQABEAAAEAAAEAEQAAAQAAEAARAAABAAEAABAAAAEAAAAAAQAAAQAAAAAAEAAAEAAAAAAAQAAAQAAAAAAEAAAAAAAAAAAAAARERERERERERAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
-    
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA/4QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAERERERERERERAAAAAAAAERAQAAAAAAEBEAEAAAAAEAEQABAAAAEAARAAAQAAAQABEAAAEAAAEAEQAAAQAAEAARAAABAAEAABAAAAEAAAAAAQAAAQAAAAAAEAAAEAAAAAAAQAAAQAAAAAAEAAAAAAAAAAAAAARERERERERERAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    />
+
     <!-- Blockly -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/blockly/9.3.1/blockly.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/blockly/9.3.1/msg/pt-br.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/blockly/9.3.1/msg/en.js"></script>
-    
+
     <!-- Prism.js para syntax highlighting -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+      rel="stylesheet"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-xml.min.js"></script>
 
+	<!-- Monaco for XML -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs/loader.min.js"></script>
+
+
     <!-- CSS próprio dividido -->
-	<link rel="stylesheet" href="css/global.css">
-	<link rel="stylesheet" href="css/header.css">
-	<link rel="stylesheet" href="css/blockly.css">
-	<link rel="stylesheet" href="css/themes.css">
-	<link rel="stylesheet" href="css/modals.css">
-	<link rel="stylesheet" href="css/helpers.css">
-	<link rel="stylesheet" href="css/modals-notifications.css">
-
-</head>
-<body>
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/blockly.css" />
+    <link rel="stylesheet" href="css/themes.css" />
+    <link rel="stylesheet" href="css/modals.css" />
+    <link rel="stylesheet" href="css/helpers.css" />
+    <link rel="stylesheet" href="css/modals-notifications.css" />
+  </head>
+  <body>
     <div class="header">
-        <h2 id="title">MIT App Inventor Extension Builder</h2>
-            <div class="header-controls">
-                <select id="themeSelect" class="theme-select">
-                    <option value="light">Light Theme</option>
-                    <option value="dark">Dark Theme</option>
-                    <option value="github">GitHub</option>
-                    <option value="monokai">Monokai</option>
-                </select>
-                <select id="languageSelect" class="language-select">
-                    <option value="en">English</option>
-                    <option value="pt-br">Português</option>
-                </select>
-                <button class="button" onclick="saveBlocks()" title="Salve Blocks">
-                    <span class="text-save">💾</span>
-                </button>
-                <button class="button" onclick="loadBlocks()" title="Upload Blocks">
-                    <span class="text-load">📂</span>
-                </button>
-                <button class="button" onclick="addHelperTab()">Add Helper</button>
+      <h2 id="title">MIT App Inventor Extension Builder</h2>
+      <div class="header-controls">
+        <select id="themeSelect" class="theme-select">
+          <option value="light">Light Theme</option>
+          <option value="dark">Dark Theme</option>
+          <option value="github">GitHub</option>
+          <option value="monokai">Monokai</option>
+        </select>
+        <select id="languageSelect" class="language-select">
+          <option value="en">English</option>
+          <option value="pt-br">Português</option>
+        </select>
+        <button class="button" onclick="saveBlocks()" title="Salve Blocks">
+          <span class="text-save">💾</span>
+        </button>
+        <button class="button" onclick="loadBlocks()" title="Upload Blocks">
+          <span class="text-load">📂</span>
+        </button>
+        <button class="button" onclick="addHelperTab()">Add Helper</button>
 
-                <button class="button" onclick="compileExtension()">
-                    <span class="text-compile">Compile Extension</span>
-                </button>
+        <button class="button" onclick="compileExtension()">
+          <span class="text-compile">Compile Extension</span>
+        </button>
 
-                <button class="button" onclick="generateJavaCode()">
-                    <span class="text-generate">Build Java File</span>
-                </button>
-                <button class="button" onclick="downloadCode()">
-                    <span class="text-download">Download .java</span>
-                </button>
-            </div>
+        <button class="button" onclick="generateJavaCode()">
+          <span class="text-generate">Build Java File</span>
+        </button>
+        <button class="button" onclick="downloadCode()">
+          <span class="text-download">Download .java</span>
+        </button>
+      </div>
     </div>
 
     <!-- Tab Navigation -->
     <div class="tab-container">
-	    <button class="tab-button active" onclick="showTab('ideTab')">Blocks</button>
-	    <button class="tab-button" onclick="showTab('manifestTab')">AndroidManifest.xml</button>
-	    <button class="tab-button" onclick="showTab('fastTab')">fast.yml</button>
-	    <button class="tab-button" onclick="showTab('outputTab')">Java File</button>
-	    <button class="tab-button" onclick="showTab('dependenciesTab')">Dependencies</button>
-	</div>
+      <button class="tab-button active" onclick="showTab('ideTab')">
+        Blocks
+      </button>
+      <button class="tab-button" onclick="showTab('manifestTab')">
+        AndroidManifest.xml
+      </button>
+      <button class="tab-button" onclick="showTab('fastTab')">fast.yml</button>
+      <button class="tab-button" onclick="showTab('outputTab')">
+        Java File
+      </button>
+      <button class="tab-button" onclick="showTab('dependenciesTab')">
+        Dependencies
+      </button>
+    </div>
 
     <!-- Tab Content -->
     <div id="ideTab" class="tab-content active">
-        <div id="blocklyDiv"></div>
+      <div id="blocklyDiv"></div>
     </div>
 
     <div id="manifestTab" class="tab-content">
-        <textarea id="androidManifest" class="language-xml" placeholder="Edit AndroidManifest.xml here">
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.mypackage.testextension.testextension">
-
-  <application>
-    <!-- You can use any manifest tag that goes inside the <application> tag -->
-    <!-- <service android:name="com.example.MyService"> ... </service> -->
-  </application>
-
-  <!-- Other than <application> level tags, you can use <uses-permission> & <queries> tags -->
-  <!-- <uses-permission android:name="android.permission.INTERNET"/> -->
-  <!-- <queries> ... </queries> -->
-
-</manifest>
-        </textarea>
+		<div id="androidManifest" style="height:500px;"></div>
     </div>
 
     <div id="fastTab" class="tab-content">
-        <textarea id="fastYml" class="language-yaml" placeholder="Edit fast.yml here">
+      <textarea
+        id="fastYml"
+        class="language-yaml"
+        placeholder="Edit fast.yml here"
+      >
 # The name of the extension developer
 author: BosonsHiggs
 
@@ -146,427 +153,426 @@ R8: false
 # Extension assets. [Should be present into assets directory]
 #assets:
 #- my-awesome-asset.anything
-        </textarea>
+        </textarea
+      >
     </div>
 
     <div id="outputTab" class="tab-content">
-        <pre><code id="outputCode" class="language-java theme-light">/* Output Java code will appear here */</code></pre>
+      <pre><code id="outputCode" class="language-java theme-light">/* Output Java code will appear here */</code></pre>
     </div>
 
     <!-- Dependencies Tab -->
-	<div id="dependenciesTab" class="tab-content">
-	    <h3>Add Dependencies (JAR/AAR)</h3>
-	    <input type="url" id="dependencyUrl" placeholder="Enter URL of .jar or .aar file" />
-	    <button onclick="addDependency()">Add Dependency</button>
-	    <ul id="dependenciesList"></ul>
-	</div>
-    
-	<xml id="toolbox" style="display: none">
-	    <category id="cat_config" name="Configuration" colour="#5C6BC0">
-	        <block type="extension_class"></block>
-	        <block type="custom_annotation"></block>
-	        <block type="constructor_declaration"></block>
-	        <block type="constructor_parameter"></block>
-	        <block type="constructor_super_call"></block>
-	        <block type="package_declaration"></block>
-	    </category>
+    <div id="dependenciesTab" class="tab-content">
+      <h3>Add Dependencies (JAR/AAR)</h3>
+      <input
+        type="url"
+        id="dependencyUrl"
+        placeholder="Enter URL of .jar or .aar file"
+      />
+      <button onclick="addDependency()">Add Dependency</button>
+      <ul id="dependenciesList"></ul>
+    </div>
 
-	    <category id="cat_imports" name="Imports" colour="#00897B">
-	        <block type="import_basic"></block>
-	        <block type="import_manual"></block>
-	        <block type="import_package"></block>
-	        <block type="import_class"></block>
-	        <block type="import_static"></block>
-	        <block type="import_manual">
-	            <field name="IMPORT_PATH">java.util.HashMap</field>
-	        </block>		    
-	    </category>
+    <xml id="toolbox" style="display: none">
+      <category id="cat_config" name="Configuration" colour="#5C6BC0">
+        <block type="extension_class"></block>
+        <block type="custom_annotation"></block>
+        <block type="constructor_declaration"></block>
+        <block type="constructor_parameter"></block>
+        <block type="constructor_super_call"></block>
+        <block type="package_declaration"></block>
+      </category>
 
-	    <category id="cat_imported" name="Imported Classes" colour="#6D4C41">
-	        <block type="imported_static_method"></block>
-	        <block type="imported_static_field"></block>
-	        <block type="imported_type_declaration"></block>
-	        <block type="imported_interface"></block>
-	    </category>
-	    
-	    <category id="cat_props" name="Properties" colour="#FB8C00">
-	        <block type="property_declaration"></block>
-	        <block type="designer_property"></block>
-	        <block type="set_property"></block>
-	        <block type="get_property"></block>
-	    </category>
+      <category id="cat_imports" name="Imports" colour="#00897B">
+        <block type="import_basic"></block>
+        <block type="import_manual"></block>
+        <block type="import_package"></block>
+        <block type="import_class"></block>
+        <block type="import_static"></block>
+        <block type="import_manual">
+          <field name="IMPORT_PATH">java.util.HashMap</field>
+        </block>
+      </category>
 
-	    <category id="cat_method_inserts" name="Method Inserts" colour="#4CAF50">
-		    <block type="post_runnable"></block>
-		    <block type="run_on_ui_thread"></block>
-		    <block type="set_on_click_listener"></block>
-		    <block type="add_text_view"></block>
-		    <block type="add_image_view"></block>
-		    <block type="scroll_to_bottom"></block>
-		    <block type="show_toast"></block>
-		</category>
+      <category id="cat_imported" name="Imported Classes" colour="#6D4C41">
+        <block type="imported_static_method"></block>
+        <block type="imported_static_field"></block>
+        <block type="imported_type_declaration"></block>
+        <block type="imported_interface"></block>
+      </category>
 
-	    
-	    <category id="cat_methods" name="Methods" colour="#7CB342">
-	        <block type="method_declaration"></block>
-	        <block type="event_declaration"></block>
-	        <block type="custom_dispatcher"></block>
-	        <block type="method_return"></block>
-	        <block type="method_call"></block>
-	    </category>
+      <category id="cat_props" name="Properties" colour="#FB8C00">
+        <block type="property_declaration"></block>
+        <block type="designer_property"></block>
+        <block type="set_property"></block>
+        <block type="get_property"></block>
+      </category>
 
-	    <category id="cat_enum" name="Enum Builder" colour="#6D4C41">
-		    <!-- Enum Structure Blocks -->
-		    <label text="Enum Structure"></label>
-		    <block type="enum_declaration">
-		        <value name="ENUM_NAME">
-		            <field name="TEXT">BooleanValue</field>
-		        </value>
-		        <value name="TYPE_NAME">
-		            <field name="TEXT">Boolean</field>
-		        </value>
-		        <value name="VALUE_TYPE">
-		            <field name="TEXT">Boolean</field>
-		        </value>
-		    </block>
-		    
-		    <!-- Enum Constants -->
-		    <label text="Enum Constants"></label>
-		    <block type="enum_constant">
-		        <value name="NAME">
-		            <field name="TEXT">FALSE</field>
-		        </value>
-		        <value name="VALUE">
-		            <field name="TEXT">false</field>
-		        </value>
-		    </block>
-		    <block type="enum_constant">
-		        <value name="NAME">
-		            <field name="TEXT">TRUE</field>
-		        </value>
-		        <value name="VALUE">
-		            <field name="TEXT">true</field>
-		        </value>
-		    </block>
+      <category id="cat_method_inserts" name="Method Inserts" colour="#4CAF50">
+        <block type="post_runnable"></block>
+        <block type="run_on_ui_thread"></block>
+        <block type="set_on_click_listener"></block>
+        <block type="add_text_view"></block>
+        <block type="add_image_view"></block>
+        <block type="scroll_to_bottom"></block>
+        <block type="show_toast"></block>
+      </category>
 
-		    <!-- Fields & Constructor -->
-		    <label text="Fields & Constructor"></label>
-		    <block type="enum_value_field">
-		        <value name="TYPE">
-		            <field name="TEXT">Boolean</field>
-		        </value>
-		    </block>
-		    <block type="enum_constructor">
-		        <value name="ENUM_NAME">
-		            <field name="TEXT">BooleanValue</field>
-		        </value>
-		        <value name="TYPE">
-		            <field name="TEXT">Boolean</field>
-		        </value>
-		    </block>
-		    <block type="enum_constructor_assignment">
-		        <field name="FIELD_NAME">value</field>
-		        <field name="PARAM_NAME">value</field>
-		    </block>
+      <category id="cat_methods" name="Methods" colour="#7CB342">
+        <block type="method_declaration"></block>
+        <block type="event_declaration"></block>
+        <block type="custom_dispatcher"></block>
+        <block type="method_return"></block>
+        <block type="method_call"></block>
+      </category>
 
-		    <!-- Methods & Lookup -->
-		    <label text="Methods & Lookup"></label>
-		    <block type="enum_to_underlying">
-		        <value name="TYPE">
-		            <field name="TEXT">Boolean</field>
-		        </value>
-		    </block>
-		    <block type="enum_return_value">
-		        <field name="RETURN_VALUE">value</field>
-		    </block>
-		    <block type="enum_lookup_map">
-		        <value name="TYPE">
-		            <field name="TEXT">Boolean</field>
-		        </value>
-		        <value name="ENUM_NAME">
-		            <field name="TEXT">BooleanValue</field>
-		        </value>
-		    </block>
-		    <block type="enum_static_init">
-		        <field name="ENUM_NAME">BooleanValue</field>
-		    </block>
-		    <block type="enum_from_underlying">
-		        <value name="ENUM_NAME">
-		            <field name="TEXT">BooleanValue</field>
-		        </value>
-		        <value name="TYPE">
-		            <field name="TEXT">Boolean</field>
-		        </value>
-		    </block>
+      <category id="cat_enum" name="Enum Builder" colour="#6D4C41">
+        <!-- Enum Structure Blocks -->
+        <label text="Enum Structure"></label>
+        <block type="enum_declaration">
+          <value name="ENUM_NAME">
+            <field name="TEXT">BooleanValue</field>
+          </value>
+          <value name="TYPE_NAME">
+            <field name="TEXT">Boolean</field>
+          </value>
+          <value name="VALUE_TYPE">
+            <field name="TEXT">Boolean</field>
+          </value>
+        </block>
 
-		    <!-- Separator -->
-		    <sep gap="32"></sep>
+        <!-- Enum Constants -->
+        <label text="Enum Constants"></label>
+        <block type="enum_constant">
+          <value name="NAME">
+            <field name="TEXT">FALSE</field>
+          </value>
+          <value name="VALUE">
+            <field name="TEXT">false</field>
+          </value>
+        </block>
+        <block type="enum_constant">
+          <value name="NAME">
+            <field name="TEXT">TRUE</field>
+          </value>
+          <value name="VALUE">
+            <field name="TEXT">true</field>
+          </value>
+        </block>
 
-		    <!-- Quick Start Template -->
-		    <label text="Quick Start Template"></label>
-		    <block type="enum_declaration">
-		        <value name="ENUM_NAME">
-		            <field name="TEXT">BooleanValue</field>
-		        </value>
-		        <value name="TYPE_NAME">
-		            <field name="TEXT">Boolean</field>
-		        </value>
-		        <value name="VALUE_TYPE">
-		            <field name="TEXT">Boolean</field>
-		        </value>
-		        <statement name="CONSTANTS">
-		            <block type="enum_constant">
-		                <value name="NAME">
-		                    <field name="TEXT">FALSE</field>
-		                </value>
-		                <value name="VALUE">
-		                    <field name="TEXT">false</field>
-		                </value>
-		                <next>
-		                    <block type="enum_constant">
-		                        <value name="NAME">
-		                            <field name="TEXT">TRUE</field>
-		                        </value>
-		                        <value name="VALUE">
-		                            <field name="TEXT">true</field>
-		                        </value>
-		                    </block>
-		                </next>
-		            </block>
-		        </statement>
-		        <statement name="METHODS">
-		            <block type="enum_value_field">
-		                <value name="TYPE">
-		                    <field name="TEXT">Boolean</field>
-		                </value>
-		                <next>
-		                    <block type="enum_constructor">
-		                        <value name="ENUM_NAME">
-		                            <field name="TEXT">BooleanValue</field>
-		                        </value>
-		                        <value name="TYPE">
-		                            <field name="TEXT">Boolean</field>
-		                        </value>
-		                        <statement name="CONSTRUCTOR_BODY">
-		                            <block type="enum_constructor_assignment">
-		                                <field name="FIELD_NAME">value</field>
-		                                <field name="PARAM_NAME">value</field>
-		                            </block>
-		                        </statement>
-		                        <next>
-		                            <block type="enum_to_underlying">
-		                                <value name="TYPE">
-		                                    <field name="TEXT">Boolean</field>
-		                                </value>
-		                                <statement name="METHOD_BODY">
-		                                    <block type="enum_return_value">
-		                                        <field name="RETURN_VALUE">value</field>
-		                                    </block>
-		                                </statement>
-		                                <next>
-		                                    <block type="enum_lookup_map">
-		                                        <value name="TYPE">
-		                                            <field name="TEXT">Boolean</field>
-		                                        </value>
-		                                        <value name="ENUM_NAME">
-		                                            <field name="TEXT">BooleanValue</field>
-		                                        </value>
-		                                        <next>
-		                                            <block type="enum_static_init">
-		                                                <field name="ENUM_NAME">BooleanValue</field>
-		                                                <next>
-		                                                    <block type="enum_from_underlying">
-		                                                        <value name="ENUM_NAME">
-		                                                            <field name="TEXT">BooleanValue</field>
-		                                                        </value>
-		                                                        <value name="TYPE">
-		                                                            <field name="TEXT">Boolean</field>
-		                                                        </value>
-		                                                    </block>
-		                                                </next>
-		                                            </block>
-		                                        </next>
-		                                    </block>
-		                                </next>
-		                            </block>
-		                        </next>
-		                    </block>
-		                </next>
-		            </block>
-		        </statement>
-		    </block>
-		</category>
+        <!-- Fields & Constructor -->
+        <label text="Fields & Constructor"></label>
+        <block type="enum_value_field">
+          <value name="TYPE">
+            <field name="TEXT">Boolean</field>
+          </value>
+        </block>
+        <block type="enum_constructor">
+          <value name="ENUM_NAME">
+            <field name="TEXT">BooleanValue</field>
+          </value>
+          <value name="TYPE">
+            <field name="TEXT">Boolean</field>
+          </value>
+        </block>
+        <block type="enum_constructor_assignment">
+          <field name="FIELD_NAME">value</field>
+          <field name="PARAM_NAME">value</field>
+        </block>
 
-	    <sep></sep>
+        <!-- Methods & Lookup -->
+        <label text="Methods & Lookup"></label>
+        <block type="enum_to_underlying">
+          <value name="TYPE">
+            <field name="TEXT">Boolean</field>
+          </value>
+        </block>
+        <block type="enum_return_value">
+          <field name="RETURN_VALUE">value</field>
+        </block>
+        <block type="enum_lookup_map">
+          <value name="TYPE">
+            <field name="TEXT">Boolean</field>
+          </value>
+          <value name="ENUM_NAME">
+            <field name="TEXT">BooleanValue</field>
+          </value>
+        </block>
+        <block type="enum_static_init">
+          <field name="ENUM_NAME">BooleanValue</field>
+        </block>
+        <block type="enum_from_underlying">
+          <value name="ENUM_NAME">
+            <field name="TEXT">BooleanValue</field>
+          </value>
+          <value name="TYPE">
+            <field name="TEXT">Boolean</field>
+          </value>
+        </block>
 
-	    <category id="cat_control" name="Control" colour="#E53935">
-		    <!-- Basic Control Blocks -->
-		    <label text="Basic Control"></label>
-		    <block type="controls_if_java"></block>
-		    <block type="controls_for_java">
-		        <field name="VAR">i</field>
-		        <field name="FROM">0</field>
-		        <field name="TO">10</field>
-		        <field name="STEP">1</field>
-		    </block>
-		    <block type="controls_foreach_java">
-		        <field name="ITEM_TYPE">String</field>
-		        <field name="ITEM_NAME">item</field>
-		        <field name="COLLECTION_NAME">items</field>
-		    </block>
-		    <block type="controls_while_java"></block>
-		    <block type="controls_do_while_java"></block>
+        <!-- Separator -->
+        <sep gap="32"></sep>
 
-		    <!-- Switch Case -->
-		    <label text="Switch Case"></label>
-		    <block type="controls_switch_java"></block>
-		    <block type="controls_case_java">
-		        <field name="ADD_BREAK">TRUE</field>
-		    </block>
+        <!-- Quick Start Template -->
+        <label text="Quick Start Template"></label>
+        <block type="enum_declaration">
+          <value name="ENUM_NAME">
+            <field name="TEXT">BooleanValue</field>
+          </value>
+          <value name="TYPE_NAME">
+            <field name="TEXT">Boolean</field>
+          </value>
+          <value name="VALUE_TYPE">
+            <field name="TEXT">Boolean</field>
+          </value>
+          <statement name="CONSTANTS">
+            <block type="enum_constant">
+              <value name="NAME">
+                <field name="TEXT">FALSE</field>
+              </value>
+              <value name="VALUE">
+                <field name="TEXT">false</field>
+              </value>
+              <next>
+                <block type="enum_constant">
+                  <value name="NAME">
+                    <field name="TEXT">TRUE</field>
+                  </value>
+                  <value name="VALUE">
+                    <field name="TEXT">true</field>
+                  </value>
+                </block>
+              </next>
+            </block>
+          </statement>
+          <statement name="METHODS">
+            <block type="enum_value_field">
+              <value name="TYPE">
+                <field name="TEXT">Boolean</field>
+              </value>
+              <next>
+                <block type="enum_constructor">
+                  <value name="ENUM_NAME">
+                    <field name="TEXT">BooleanValue</field>
+                  </value>
+                  <value name="TYPE">
+                    <field name="TEXT">Boolean</field>
+                  </value>
+                  <statement name="CONSTRUCTOR_BODY">
+                    <block type="enum_constructor_assignment">
+                      <field name="FIELD_NAME">value</field>
+                      <field name="PARAM_NAME">value</field>
+                    </block>
+                  </statement>
+                  <next>
+                    <block type="enum_to_underlying">
+                      <value name="TYPE">
+                        <field name="TEXT">Boolean</field>
+                      </value>
+                      <statement name="METHOD_BODY">
+                        <block type="enum_return_value">
+                          <field name="RETURN_VALUE">value</field>
+                        </block>
+                      </statement>
+                      <next>
+                        <block type="enum_lookup_map">
+                          <value name="TYPE">
+                            <field name="TEXT">Boolean</field>
+                          </value>
+                          <value name="ENUM_NAME">
+                            <field name="TEXT">BooleanValue</field>
+                          </value>
+                          <next>
+                            <block type="enum_static_init">
+                              <field name="ENUM_NAME">BooleanValue</field>
+                              <next>
+                                <block type="enum_from_underlying">
+                                  <value name="ENUM_NAME">
+                                    <field name="TEXT">BooleanValue</field>
+                                  </value>
+                                  <value name="TYPE">
+                                    <field name="TEXT">Boolean</field>
+                                  </value>
+                                </block>
+                              </next>
+                            </block>
+                          </next>
+                        </block>
+                      </next>
+                    </block>
+                  </next>
+                </block>
+              </next>
+            </block>
+          </statement>
+        </block>
+      </category>
 
-		    <!-- Exception Handling -->
-		    <label text="Exception Handling"></label>
-		    <block type="controls_try_catch">
-		        <field name="EXCEPTION_TYPE">Exception</field>
-		        <field name="EXCEPTION_VAR">e</field>
-		    </block>
-		    <block type="controls_assert_java"></block>
+      <sep></sep>
 
-		    <!-- Flow Control -->
-		    <label text="Flow Control"></label>
-		    <block type="controls_return"></block>
-		    <block type="controls_break_java"></block>
-		    <block type="controls_continue_java"></block>
-		    <block type="controls_label_java">
-		        <field name="LABEL">myLabel</field>
-		    </block>
+      <category id="cat_control" name="Control" colour="#E53935">
+        <!-- Basic Control Blocks -->
+        <label text="Basic Control"></label>
+        <block type="controls_if_java"></block>
+        <block type="controls_for_java">
+          <field name="VAR">i</field>
+          <field name="FROM">0</field>
+          <field name="TO">10</field>
+          <field name="STEP">1</field>
+        </block>
+        <block type="controls_foreach_java">
+          <field name="ITEM_TYPE">String</field>
+          <field name="ITEM_NAME">item</field>
+          <field name="COLLECTION_NAME">items</field>
+        </block>
+        <block type="controls_while_java"></block>
+        <block type="controls_do_while_java"></block>
 
-		    <!-- Thread Control -->
-		    <label text="Thread Control"></label>
-		    <block type="controls_synchronized_java"></block>
-		</category>
+        <!-- Switch Case -->
+        <label text="Switch Case"></label>
+        <block type="controls_switch_java"></block>
+        <block type="controls_case_java">
+          <field name="ADD_BREAK">TRUE</field>
+        </block>
 
-	    <category id="cat_logic" name="Logic" colour="#FDD835">
-	        <block type="logic_compare"></block>
-	        <block type="logic_operation"></block>
-	        <block type="logic_negate"></block>
-	        <block type="logic_boolean"></block>
-	        <block type="logic_null"></block>
-	    </category>
+        <!-- Exception Handling -->
+        <label text="Exception Handling"></label>
+        <block type="controls_try_catch">
+          <field name="EXCEPTION_TYPE">Exception</field>
+          <field name="EXCEPTION_VAR">e</field>
+        </block>
+        <block type="controls_assert_java"></block>
 
-	    <category id="cat_math" name="Math" colour="#8E24AA">
-	        <block type="math_operation"></block>
-	        <block type="math_compare"></block>
-	        <block type="math_function"></block>
-	        <block type="math_random"></block>
-	        <block type="math_number"></block>
-	        <block type="math_constant"></block>
-	    </category>
+        <!-- Flow Control -->
+        <label text="Flow Control"></label>
+        <block type="controls_return"></block>
+        <block type="controls_break_java"></block>
+        <block type="controls_continue_java"></block>
+        <block type="controls_label_java">
+          <field name="LABEL">myLabel</field>
+        </block>
 
-	    <category id="cat_text" name="Text" colour="#3949AB">
-		    <block type="text_string"></block>
-		    <block type="text_compare"></block>
-		    <block type="text_join"></block>
-		    <block type="text_operation"></block>
-		    <block type="text_charAt"></block>
-		    <block type="text_indexOf"></block>
-		    <block type="text_replace"></block>
-		    <block type="text_split"></block>
-		</category>
+        <!-- Thread Control -->
+        <label text="Thread Control"></label>
+        <block type="controls_synchronized_java"></block>
+      </category>
 
-		<category id="cat_comments" name="Comments" colour="#757575">
-	        <block type="comment_single"></block>
-	        <block type="comment_multi"></block>
-	        <block type="comment_multi_text"></block>
-	    </category>
+      <category id="cat_logic" name="Logic" colour="#FDD835">
+        <block type="logic_compare"></block>
+        <block type="logic_operation"></block>
+        <block type="logic_negate"></block>
+        <block type="logic_boolean"></block>
+        <block type="logic_null"></block>
+      </category>
 
-	    <category id="cat_lists" name="Lists" colour="#00ACC1">
-	        <block type="lists_create"></block>
-	        <block type="lists_operation"></block>
-	        <block type="lists_get_index"></block>
-	        <block type="lists_set_index"></block>
-	        <block type="lists_forEach"></block>
-	    </category>
+      <category id="cat_math" name="Math" colour="#8E24AA">
+        <block type="math_operation"></block>
+        <block type="math_compare"></block>
+        <block type="math_function"></block>
+        <block type="math_random"></block>
+        <block type="math_number"></block>
+        <block type="math_constant"></block>
+      </category>
 
-	    <category id="cat_dictionaries" name="Dictionaries" colour="#43A047">
-		    <block type="dict_create"></block>
-		    <block type="dict_get"></block>
-		    <block type="dict_set"></block>
-		    <block type="dict_remove"></block>
-		    <block type="dict_containsKey"></block>
-		    <block type="dict_keys"></block>
-		    <block type="dict_values"></block>
-		</category>
+      <category id="cat_text" name="Text" colour="#3949AB">
+        <block type="text_string"></block>
+        <block type="text_compare"></block>
+        <block type="text_join"></block>
+        <block type="text_operation"></block>
+        <block type="text_charAt"></block>
+        <block type="text_indexOf"></block>
+        <block type="text_replace"></block>
+        <block type="text_split"></block>
+      </category>
 
+      <category id="cat_comments" name="Comments" colour="#757575">
+        <block type="comment_single"></block>
+        <block type="comment_multi"></block>
+        <block type="comment_multi_text"></block>
+      </category>
 
-	    <category id="cat_object" name="Objects" colour="#F4511E">
-	        <block type="object_create"></block>
-	        <block type="object_get_field"></block>
-	        <block type="object_set_field"></block>
-	        <block type="object_call_method"></block>
-	        <block type="object_instance_of"></block>
-	        <block type="object_cast"></block>
-	        <sep gap="8"></sep>
-	        <block type="constructor_arg"></block>
-	        <block type="method_arg"></block>
-	    </category>
+      <category id="cat_lists" name="Lists" colour="#00ACC1">
+        <block type="lists_create"></block>
+        <block type="lists_operation"></block>
+        <block type="lists_get_index"></block>
+        <block type="lists_set_index"></block>
+        <block type="lists_forEach"></block>
+      </category>
 
-	    <category id="cat_colors" name="Colors" colour="#D81B60">
-		    <!-- Existing Blocks -->
-		    <block type="color_picker"></block>
-		    <block type="color_rgb"></block>
-		    <block type="color_blend"></block>
-		    <block type="color_random"></block>
-		    
-		    <!-- Newly Added Blocks -->
-		    <block type="color_brightness"></block>
-		    <block type="color_hex_to_rgb"></block>
-		    <block type="color_rgb_to_hex"></block>
-		</category>
+      <category id="cat_dictionaries" name="Dictionaries" colour="#43A047">
+        <block type="dict_create"></block>
+        <block type="dict_get"></block>
+        <block type="dict_set"></block>
+        <block type="dict_remove"></block>
+        <block type="dict_containsKey"></block>
+        <block type="dict_keys"></block>
+        <block type="dict_values"></block>
+      </category>
 
+      <category id="cat_object" name="Objects" colour="#F4511E">
+        <block type="object_create"></block>
+        <block type="object_get_field"></block>
+        <block type="object_set_field"></block>
+        <block type="object_call_method"></block>
+        <block type="object_instance_of"></block>
+        <block type="object_cast"></block>
+        <sep gap="8"></sep>
+        <block type="constructor_arg"></block>
+        <block type="method_arg"></block>
+      </category>
 
-	    <category id="cat_variables_custom" name="Variables" colour="#546E7A">
-		    <block type="create_variable"></block>
-		    <block type="set_variable"></block>
-		    <block type="get_variable"></block>
-		</category>
+      <category id="cat_colors" name="Colors" colour="#D81B60">
+        <!-- Existing Blocks -->
+        <block type="color_picker"></block>
+        <block type="color_rgb"></block>
+        <block type="color_blend"></block>
+        <block type="color_random"></block>
 
+        <!-- Newly Added Blocks -->
+        <block type="color_brightness"></block>
+        <block type="color_hex_to_rgb"></block>
+        <block type="color_rgb_to_hex"></block>
+      </category>
 
-	    <category id="cat_functions" name="Functions" colour="#827717">
-		    <block type="procedures_defnoreturn"></block>
-		    <block type="procedures_defreturn"></block>
-		    <block type="procedures_callnoreturn"></block>
-		    <block type="procedures_callreturn"></block>
-		    <block type="function_return"></block>
-		    <block type="function_with_parameters"></block>
-		</category>
+      <category id="cat_variables_custom" name="Variables" colour="#546E7A">
+        <block type="create_variable"></block>
+        <block type="set_variable"></block>
+        <block type="get_variable"></block>
+      </category>
 
-	</xml>
+      <category id="cat_functions" name="Functions" colour="#827717">
+        <block type="procedures_defnoreturn"></block>
+        <block type="procedures_defreturn"></block>
+        <block type="procedures_callnoreturn"></block>
+        <block type="procedures_callreturn"></block>
+        <block type="function_return"></block>
+        <block type="function_with_parameters"></block>
+      </category>
+    </xml>
 
+    <!-- Scripts próprios -->
+    <script src="js/translations.js"></script>
 
-	<!-- Scripts próprios -->
-	<script src="js/translations.js"></script>
-
-	<script src="js/blocks/constructor_blocks.js"></script>
-	<script src="js/blocks/functions.js"></script>
-	<script src="js/blocks/methods.js"></script>
-	<script src="js/blocks/control_blocks.js"></script>
-	<script src="js/blocks/math_blocks.js"></script>
-	<script src="js/blocks/text_blocks.js"></script>
-	<script src="js/blocks/list_blocks.js"></script>
-	<script src="js/blocks/logic_blocks.js"></script>
-	<script src="js/blocks/dictionary_blocks.js"></script>
-	<script src="js/blocks/color_blocks.js"></script>
-	<script src="js/blocks/import_blocks.js"></script>
-	<script src="js/blocks/imported_class_blocks.js"></script>
-	<script src="js/blocks/object_blocks.js"></script>
-	<script src="js/blocks/imported_class_blocks.js"></script>
-	<script src="js/blocks/blocks.js"></script>
-	<script src="js/blocks/method_inserts.js"></script>
-	<script src="js/blocks/variables.js"></script>
-	<script src="js/blocks/comments_blocks.js"></script>
-	<script src="js/blocks/enums_blocks.js"></script>
-	<script src="js/helpers.js"></script>
-	<script src="js/main.js"></script>
-</body>
+    <script src="js/blocks/constructor_blocks.js"></script>
+    <script src="js/blocks/functions.js"></script>
+    <script src="js/blocks/methods.js"></script>
+    <script src="js/blocks/control_blocks.js"></script>
+    <script src="js/blocks/math_blocks.js"></script>
+    <script src="js/blocks/text_blocks.js"></script>
+    <script src="js/blocks/list_blocks.js"></script>
+    <script src="js/blocks/logic_blocks.js"></script>
+    <script src="js/blocks/dictionary_blocks.js"></script>
+    <script src="js/blocks/color_blocks.js"></script>
+    <script src="js/blocks/import_blocks.js"></script>
+    <script src="js/blocks/imported_class_blocks.js"></script>
+    <script src="js/blocks/object_blocks.js"></script>
+    <script src="js/blocks/imported_class_blocks.js"></script>
+    <script src="js/blocks/blocks.js"></script>
+    <script src="js/blocks/method_inserts.js"></script>
+    <script src="js/blocks/variables.js"></script>
+    <script src="js/blocks/comments_blocks.js"></script>
+    <script src="js/blocks/enums_blocks.js"></script>
+    <script src="js/helpers.js"></script>
+    <script src="js/main.js"></script>
+  </body>
 </html>

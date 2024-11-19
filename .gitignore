@@ -1,3 +1,5 @@
+# Ignoring temp diretory in python server
+server/PythonServer/temp/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
